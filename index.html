@@ -1,589 +1,1361 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nipesh Pant — Backend & Systems Engineer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink: #0B1E33;
-    --ink-panel: #102A44;
-    --ink-panel-2: #0E2438;
-    --grid-line: rgba(111,207,217,0.10);
-    --rule: #2A4A66;
-    --rule-soft: rgba(42,74,102,0.55);
-    --amber: #E8A33D;
-    --amber-dim: rgba(232,163,61,0.15);
-    --cyan: #6FCFD9;
-    --cyan-dim: rgba(111,207,217,0.12);
-    --paper: #F2F0E8;
-    --paper-dim: #A9BAC8;
-    --paper-faint: #6E859A;
-    --display: 'Space Grotesk', sans-serif;
-    --body: 'IBM Plex Sans', sans-serif;
-    --mono: 'IBM Plex Mono', monospace;
-    --max: 1080px;
-  }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nipesh Pant — Backend & Systems Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0b1e33;
+        --ink-panel: #102a44;
+        --ink-panel-2: #0e2438;
+        --grid-line: rgba(111, 207, 217, 0.1);
+        --rule: #2a4a66;
+        --rule-soft: rgba(42, 74, 102, 0.55);
+        --amber: #e8a33d;
+        --amber-dim: rgba(232, 163, 61, 0.15);
+        --cyan: #6fcfd9;
+        --cyan-dim: rgba(111, 207, 217, 0.12);
+        --paper: #f2f0e8;
+        --paper-dim: #a9bac8;
+        --paper-faint: #6e859a;
+        --display: "Space Grotesk", sans-serif;
+        --body: "IBM Plex Sans", sans-serif;
+        --mono: "IBM Plex Mono", monospace;
+        --max: 1080px;
+      }
 
-  *{ box-sizing: border-box; }
-  html{ scroll-behavior: smooth; }
-  body{
-    margin:0;
-    background: var(--ink);
-    color: var(--paper);
-    font-family: var(--body);
-    line-height: 1.6;
-    background-image:
-      linear-gradient(var(--grid-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: 42px 42px;
-  }
-  ::selection{ background: var(--amber); color: var(--ink); }
-  a{ color: var(--cyan); }
-  :focus-visible{
-    outline: 2px solid var(--amber);
-    outline-offset: 3px;
-  }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--ink);
+        color: var(--paper);
+        font-family: var(--body);
+        line-height: 1.6;
+        background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+        background-size: 42px 42px;
+      }
+      ::selection {
+        background: var(--amber);
+        color: var(--ink);
+      }
+      a {
+        color: var(--cyan);
+      }
+      :focus-visible {
+        outline: 2px solid var(--amber);
+        outline-offset: 3px;
+      }
 
-  .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 28px; }
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 0 28px;
+      }
 
-  /* corner crop marks — blueprint motif reused across sections */
-  .crop{
-    position: relative;
-  }
-  .crop::before, .crop::after{
-    content:'';
-    position:absolute;
-    width:14px; height:14px;
-    border: 1px solid var(--rule-soft);
-  }
-  .crop::before{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
-  .crop::after{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
+      /* corner crop marks — blueprint motif reused across sections */
+      .crop {
+        position: relative;
+      }
+      .crop::before,
+      .crop::after {
+        content: "";
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        border: 1px solid var(--rule-soft);
+      }
+      .crop::before {
+        top: -1px;
+        left: -1px;
+        border-right: none;
+        border-bottom: none;
+      }
+      .crop::after {
+        bottom: -1px;
+        right: -1px;
+        border-left: none;
+        border-top: none;
+      }
 
-  /* NAV */
-  header{
-    position: sticky; top:0; z-index: 50;
-    background: rgba(11,30,51,0.86);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--rule-soft);
-  }
-  nav.wrap{
-    display:flex; align-items:center; justify-content:space-between;
-    height: 68px;
-  }
-  .logo{
-    font-family: var(--mono);
-    font-size: 15px;
-    letter-spacing: 0.04em;
-    color: var(--paper);
-    text-decoration:none;
-    display:flex; align-items:center; gap:8px;
-  }
-  .logo .dot{ width:7px; height:7px; background: var(--amber); border-radius:1px; display:inline-block; }
-  .navlinks{ display:flex; gap:2px; list-style:none; margin:0; padding:0; }
-  .navlinks a{
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--paper-dim);
-    text-decoration:none;
-    padding: 8px 14px;
-    letter-spacing:0.03em;
-    transition: color 0.15s ease;
-  }
-  .navlinks a:hover{ color: var(--amber); }
-  .menu-btn{ display:none; background:none; border:1px solid var(--rule-soft); color:var(--paper); padding:8px 10px; font-family:var(--mono); font-size:12px; }
+      /* NAV */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(11, 30, 51, 0.86);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--rule-soft);
+      }
+      nav.wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 68px;
+      }
+      .logo {
+        font-family: var(--mono);
+        font-size: 15px;
+        letter-spacing: 0.04em;
+        color: var(--paper);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .logo .dot {
+        width: 7px;
+        height: 7px;
+        background: var(--amber);
+        border-radius: 1px;
+        display: inline-block;
+      }
+      .navlinks {
+        display: flex;
+        gap: 2px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .navlinks a {
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--paper-dim);
+        text-decoration: none;
+        padding: 8px 14px;
+        letter-spacing: 0.03em;
+        transition: color 0.15s ease;
+      }
+      .navlinks a:hover {
+        color: var(--amber);
+      }
+      .menu-btn {
+        display: none;
+        background: none;
+        border: 1px solid var(--rule-soft);
+        color: var(--paper);
+        padding: 8px 10px;
+        font-family: var(--mono);
+        font-size: 12px;
+      }
 
-  /* HERO */
-  .hero{ padding: 84px 0 60px; }
-  .hero-grid{ display:grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items:center; }
-  .eyebrow{
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--cyan);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin: 0 0 18px;
-    display:flex; align-items:center; gap:10px;
-  }
-  .eyebrow::before{ content:''; width:26px; height:1px; background: var(--cyan); }
-  h1.headline{
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: clamp(2.1rem, 4.2vw, 3.1rem);
-    line-height: 1.12;
-    margin: 0 0 22px;
-    color: var(--paper);
-    letter-spacing: -0.01em;
-  }
-  h1.headline em{ font-style:normal; color: var(--amber); }
-  .sub{
-    font-size: 16.5px;
-    color: var(--paper-dim);
-    max-width: 46ch;
-    margin: 0 0 30px;
-  }
-  .cta-row{ display:flex; gap: 14px; flex-wrap:wrap; }
-  .btn{
-    font-family: var(--mono);
-    font-size: 13px;
-    text-decoration:none;
-    padding: 12px 20px;
-    letter-spacing: 0.02em;
-    display:inline-flex; align-items:center; gap:8px;
-    transition: all 0.15s ease;
-  }
-  .btn-primary{ background: var(--amber); color: var(--ink); font-weight:500; }
-  .btn-primary:hover{ background:#f2b558; }
-  .btn-ghost{ border:1px solid var(--rule); color: var(--paper); }
-  .btn-ghost:hover{ border-color: var(--cyan); color: var(--cyan); }
+      /* HERO */
+      .hero {
+        padding: 84px 0 60px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 48px;
+        align-items: center;
+      }
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--cyan);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin: 0 0 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 26px;
+        height: 1px;
+        background: var(--cyan);
+      }
+      h1.headline {
+        font-family: var(--display);
+        font-weight: 600;
+        font-size: clamp(2.1rem, 4.2vw, 3.1rem);
+        line-height: 1.12;
+        margin: 0 0 22px;
+        color: var(--paper);
+        letter-spacing: -0.01em;
+      }
+      h1.headline em {
+        font-style: normal;
+        color: var(--amber);
+      }
+      .sub {
+        font-size: 16.5px;
+        color: var(--paper-dim);
+        max-width: 46ch;
+        margin: 0 0 30px;
+      }
+      .cta-row {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        font-family: var(--mono);
+        font-size: 13px;
+        text-decoration: none;
+        padding: 12px 20px;
+        letter-spacing: 0.02em;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.15s ease;
+      }
+      .btn-primary {
+        background: var(--amber);
+        color: var(--ink);
+        font-weight: 500;
+      }
+      .btn-primary:hover {
+        background: #f2b558;
+      }
+      .btn-ghost {
+        border: 1px solid var(--rule);
+        color: var(--paper);
+      }
+      .btn-ghost:hover {
+        border-color: var(--cyan);
+        color: var(--cyan);
+      }
 
-  /* SCHEMATIC DIAGRAM */
-  .schematic-frame{ position:relative; padding: 18px; }
-  .schematic-frame svg{ width:100%; height:auto; display:block; }
-  .node-label{
-    font-family: var(--mono);
-    font-size: 10.5px;
-    fill: var(--paper-dim);
-    letter-spacing: 0.02em;
-  }
-  .node-circle{ fill: var(--ink-panel); stroke: var(--cyan); stroke-width:1.4; }
-  .node-circle.core{ stroke: var(--amber); fill: var(--amber-dim); }
-  .trace{
-    fill:none; stroke: var(--rule); stroke-width: 1.2;
-    stroke-dasharray: 4 4;
-  }
-  .trace.live{ stroke: var(--cyan); stroke-dasharray: 500; stroke-dashoffset:500; animation: draw 2.4s ease forwards; }
-  @keyframes draw{ to{ stroke-dashoffset:0; } }
-  .schema-caption{
-    font-family: var(--mono); font-size:11px; color: var(--paper-faint);
-    text-align:center; margin-top:10px; letter-spacing:0.03em;
-  }
+      /* SCHEMATIC DIAGRAM */
+      .schematic-frame {
+        position: relative;
+        padding: 18px;
+      }
+      .schematic-frame svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .node-label {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        fill: var(--paper-dim);
+        letter-spacing: 0.02em;
+      }
+      .node-circle {
+        fill: var(--ink-panel);
+        stroke: var(--cyan);
+        stroke-width: 1.4;
+      }
+      .node-circle.core {
+        stroke: var(--amber);
+        fill: var(--amber-dim);
+      }
+      .trace {
+        fill: none;
+        stroke: var(--rule);
+        stroke-width: 1.2;
+        stroke-dasharray: 4 4;
+      }
+      .trace.live {
+        stroke: var(--cyan);
+        stroke-dasharray: 500;
+        stroke-dashoffset: 500;
+        animation: draw 2.4s ease forwards;
+      }
+      @keyframes draw {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      .schema-caption {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--paper-faint);
+        text-align: center;
+        margin-top: 10px;
+        letter-spacing: 0.03em;
+      }
 
-  /* SECTION SHELL */
-  section{ padding: 76px 0; border-top: 1px solid var(--rule-soft); }
-  .section-head{ display:flex; align-items:baseline; gap:16px; margin-bottom:44px; }
-  .section-tag{
-    font-family: var(--mono); font-size:12px; color: var(--amber);
-    letter-spacing:0.08em; text-transform:uppercase;
-  }
-  h2.section-title{
-    font-family: var(--display); font-weight:600;
-    font-size: clamp(1.5rem, 2.6vw, 1.9rem);
-    margin:0; color: var(--paper);
-  }
+      /* SECTION SHELL */
+      section {
+        padding: 76px 0;
+        border-top: 1px solid var(--rule-soft);
+      }
+      .section-head {
+        display: flex;
+        align-items: baseline;
+        gap: 16px;
+        margin-bottom: 44px;
+      }
+      .section-tag {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--amber);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      h2.section-title {
+        font-family: var(--display);
+        font-weight: 600;
+        font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+        margin: 0;
+        color: var(--paper);
+      }
 
-  /* ABOUT */
-  .about-body{ display:grid; grid-template-columns: 1fr 1fr; gap:40px; }
-  .about-body p{ color: var(--paper-dim); font-size:15.5px; margin:0 0 16px; }
-  .stat-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:18px; }
-  .stat-list li{ border-left:2px solid var(--rule); padding-left:16px; }
-  .stat-num{ font-family: var(--display); font-size:1.6rem; color: var(--amber); display:block; font-weight:600; }
-  .stat-label{ font-family: var(--mono); font-size:12px; color: var(--paper-faint); }
+      /* ABOUT */
+      .about-body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+      .about-body p {
+        color: var(--paper-dim);
+        font-size: 15.5px;
+        margin: 0 0 16px;
+      }
+      .stat-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .stat-list li {
+        border-left: 2px solid var(--rule);
+        padding-left: 16px;
+      }
+      .stat-num {
+        font-family: var(--display);
+        font-size: 1.6rem;
+        color: var(--amber);
+        display: block;
+        font-weight: 600;
+      }
+      .stat-label {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--paper-faint);
+      }
 
-  /* EXPERIENCE TIMELINE */
-  .timeline{ position:relative; }
-  .timeline::before{
-    content:''; position:absolute; left: 7px; top:8px; bottom:8px; width:1px;
-    background: var(--rule);
-  }
-  .tl-item{ position:relative; padding-left:36px; margin-bottom: 44px; }
-  .tl-item:last-child{ margin-bottom:0; }
-  .tl-dot{
-    position:absolute; left:0; top:6px; width:15px; height:15px;
-    border:1.5px solid var(--cyan); background: var(--ink);
-  }
-  .tl-item.current .tl-dot{ border-color: var(--amber); background: var(--amber); }
-  .tl-head{ display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; margin-bottom:6px; }
-  .tl-role{ font-family: var(--display); font-weight:600; font-size:1.1rem; color: var(--paper); }
-  .tl-dates{ font-family: var(--mono); font-size:12px; color: var(--paper-faint); margin-left:auto; }
-  .tl-org{ font-family: var(--mono); font-size:12.5px; color: var(--cyan); margin-bottom:12px; }
-  .tl-bullets{ margin:0; padding-left:18px; color: var(--paper-dim); font-size:14.5px; }
-  .tl-bullets li{ margin-bottom:6px; }
-  .tl-bullets strong{ color: var(--paper); font-weight:600; }
+      /* EXPERIENCE TIMELINE */
+      .timeline {
+        position: relative;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 7px;
+        top: 8px;
+        bottom: 8px;
+        width: 1px;
+        background: var(--rule);
+      }
+      .tl-item {
+        position: relative;
+        padding-left: 36px;
+        margin-bottom: 44px;
+      }
+      .tl-item:last-child {
+        margin-bottom: 0;
+      }
+      .tl-dot {
+        position: absolute;
+        left: 0;
+        top: 6px;
+        width: 15px;
+        height: 15px;
+        border: 1.5px solid var(--cyan);
+        background: var(--ink);
+      }
+      .tl-item.current .tl-dot {
+        border-color: var(--amber);
+        background: var(--amber);
+      }
+      .tl-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 10px;
+        margin-bottom: 6px;
+      }
+      .tl-role {
+        font-family: var(--display);
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: var(--paper);
+      }
+      .tl-dates {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--paper-faint);
+        margin-left: auto;
+      }
+      .tl-org {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--cyan);
+        margin-bottom: 12px;
+      }
+      .tl-bullets {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--paper-dim);
+        font-size: 14.5px;
+      }
+      .tl-bullets li {
+        margin-bottom: 6px;
+      }
+      .tl-bullets strong {
+        color: var(--paper);
+        font-weight: 600;
+      }
 
-  /* SKILLS */
-  .skill-groups{ display:grid; grid-template-columns: repeat(3, 1fr); gap:28px; }
-  .skill-group{ background: var(--ink-panel); border:1px solid var(--rule-soft); padding:20px; }
-  .skill-group-title{
-    font-family: var(--mono); font-size:11.5px; color: var(--cyan);
-    text-transform:uppercase; letter-spacing:0.06em; margin:0 0 14px;
-    display:flex; align-items:center; gap:8px;
-  }
-  .skill-group-title::before{ content:'#'; color: var(--rule); }
-  .chip-row{ display:flex; flex-wrap:wrap; gap:8px; }
-  .chip{
-    font-family: var(--mono); font-size:12px; color: var(--paper-dim);
-    border:1px solid var(--rule); padding:5px 10px;
-  }
+      /* SKILLS */
+      .skill-groups {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+      .skill-group {
+        background: var(--ink-panel);
+        border: 1px solid var(--rule-soft);
+        padding: 20px;
+      }
+      .skill-group-title {
+        font-family: var(--mono);
+        font-size: 11.5px;
+        color: var(--cyan);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin: 0 0 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .skill-group-title::before {
+        content: "#";
+        color: var(--rule);
+      }
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .chip {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--paper-dim);
+        border: 1px solid var(--rule);
+        padding: 5px 10px;
+      }
 
-  /* PROJECTS */
-  .proj-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; }
-  .proj-card{
-    background: var(--ink-panel); border:1px solid var(--rule-soft);
-    padding:22px; display:flex; flex-direction:column; gap:10px;
-    transition: border-color 0.15s ease, transform 0.15s ease;
-  }
-  .proj-card:hover{ border-color: var(--cyan); transform: translateY(-2px); }
-  .proj-title{ font-family: var(--display); font-weight:600; font-size:1.05rem; color:var(--paper); }
-  .proj-desc{ color: var(--paper-dim); font-size:13.8px; flex-grow:1; }
-  .proj-link{ font-family: var(--mono); font-size:12px; color: var(--amber); text-decoration:none; }
-  .proj-link:hover{ text-decoration:underline; }
+      /* AI PROJECTS (featured) */
+      .ai-proj-list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .ai-proj-card {
+        background: var(--ink-panel);
+        border: 1px solid var(--rule-soft);
+        padding: 26px 28px;
+        display: grid;
+        grid-template-columns: 1fr 1.6fr;
+        gap: 26px;
+        transition: border-color 0.15s ease;
+      }
+      .ai-proj-card:hover {
+        border-color: var(--cyan);
+      }
+      .ai-proj-head {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .ai-proj-title {
+        font-family: var(--display);
+        font-weight: 600;
+        font-size: 1.25rem;
+        color: var(--paper);
+      }
+      .ai-proj-tagline {
+        color: var(--paper-dim);
+        font-size: 14px;
+      }
+      .ai-proj-links {
+        display: flex;
+        gap: 10px;
+        margin-top: 6px;
+      }
+      .ai-proj-links a {
+        font-family: var(--mono);
+        font-size: 11.5px;
+        text-decoration: none;
+        border: 1px solid var(--rule);
+        color: var(--paper-dim);
+        padding: 6px 10px;
+      }
+      .ai-proj-links a:hover {
+        border-color: var(--amber);
+        color: var(--amber);
+      }
+      .ai-proj-body {
+        border-left: 1px solid var(--rule-soft);
+        padding-left: 24px;
+      }
+      .ai-proj-how {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--cyan);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin: 0 0 8px;
+      }
+      .ai-proj-detail {
+        color: var(--paper-dim);
+        font-size: 14px;
+        margin: 0 0 14px;
+      }
+      .ai-proj-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
 
-  /* PUBLICATIONS */
-  .pub-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:22px; }
-  .pub-item{ border-left:2px solid var(--amber); padding-left:18px; }
-  .pub-cite{ color: var(--paper-dim); font-size:14.5px; margin:0 0 6px; }
-  .pub-cite strong{ color: var(--paper); }
-  .pub-venue{ font-family: var(--mono); font-size:12px; color: var(--cyan); }
+      /* PROJECTS */
+      .proj-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .proj-card {
+        background: var(--ink-panel);
+        border: 1px solid var(--rule-soft);
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: border-color 0.15s ease, transform 0.15s ease;
+      }
+      .proj-card:hover {
+        border-color: var(--cyan);
+        transform: translateY(-2px);
+      }
+      .proj-title {
+        font-family: var(--display);
+        font-weight: 600;
+        font-size: 1.05rem;
+        color: var(--paper);
+      }
+      .proj-desc {
+        color: var(--paper-dim);
+        font-size: 13.8px;
+        flex-grow: 1;
+      }
+      .proj-link {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--amber);
+        text-decoration: none;
+      }
+      .proj-link:hover {
+        text-decoration: underline;
+      }
 
-  /* CONTACT / FOOTER */
-  footer{ padding: 60px 0 40px; }
-  .contact-grid{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:30px; align-items:flex-end; }
-  .contact-links{ display:flex; flex-direction:column; gap:10px; }
-  .contact-links a{ font-family: var(--mono); font-size:14px; text-decoration:none; color: var(--paper); }
-  .contact-links a:hover{ color: var(--amber); }
-  .footer-note{ font-family: var(--mono); font-size:11.5px; color: var(--paper-faint); }
+      /* PUBLICATIONS */
+      .pub-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+      .pub-item {
+        border-left: 2px solid var(--amber);
+        padding-left: 18px;
+      }
+      .pub-cite {
+        color: var(--paper-dim);
+        font-size: 14.5px;
+        margin: 0 0 6px;
+      }
+      .pub-cite strong {
+        color: var(--paper);
+      }
+      .pub-venue {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--cyan);
+      }
 
-  @media (max-width: 860px){
-    .hero-grid{ grid-template-columns: 1fr; }
-    .about-body{ grid-template-columns: 1fr; }
-    .skill-groups{ grid-template-columns: 1fr 1fr; }
-    .proj-grid{ grid-template-columns: 1fr 1fr; }
-    .navlinks{ display:none; }
-    .menu-btn{ display:block; }
-  }
-  @media (max-width: 560px){
-    .skill-groups{ grid-template-columns: 1fr; }
-    .proj-grid{ grid-template-columns: 1fr; }
-    .tl-dates{ margin-left:0; }
-  }
+      /* CONTACT / FOOTER */
+      footer {
+        padding: 60px 0 40px;
+      }
+      .contact-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 30px;
+        align-items: flex-end;
+      }
+      .contact-links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .contact-links a {
+        font-family: var(--mono);
+        font-size: 14px;
+        text-decoration: none;
+        color: var(--paper);
+      }
+      .contact-links a:hover {
+        color: var(--amber);
+      }
+      .footer-note {
+        font-family: var(--mono);
+        font-size: 11.5px;
+        color: var(--paper-faint);
+      }
 
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
-    .trace.live{ animation:none; stroke-dashoffset:0; stroke-dasharray:none; }
-    .proj-card{ transition:none; }
-  }
-</style>
-</head>
-<body>
+      @media (max-width: 860px) {
+        .ai-proj-card {
+          grid-template-columns: 1fr;
+        }
+        .ai-proj-body {
+          border-left: none;
+          padding-left: 0;
+          border-top: 1px solid var(--rule-soft);
+          padding-top: 16px;
+        }
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .about-body {
+          grid-template-columns: 1fr;
+        }
+        .skill-groups {
+          grid-template-columns: 1fr 1fr;
+        }
+        .proj-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .navlinks {
+          display: none;
+        }
+        .menu-btn {
+          display: block;
+        }
+      }
+      @media (max-width: 560px) {
+        .skill-groups {
+          grid-template-columns: 1fr;
+        }
+        .proj-grid {
+          grid-template-columns: 1fr;
+        }
+        .tl-dates {
+          margin-left: 0;
+        }
+      }
 
-<header>
-  <nav class="wrap">
-    <a href="#top" class="logo"><span class="dot"></span>NIPESH PANT</a>
-    <ul class="navlinks">
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#publications">Publications</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="menu-btn" aria-label="menu">MENU</button>
-  </nav>
-</header>
-
-<main id="top">
-
-  <!-- HERO -->
-  <section class="hero" style="border-top:none;">
-    <div class="wrap hero-grid">
-      <div>
-        <p class="eyebrow">Bay Area, CA · Backend &amp; Systems Engineer</p>
-        <h1 class="headline">I design the architecture underneath — <em>and I'm extending it into AI.</em></h1>
-        <p class="sub">6+ years building backend and full-stack systems across SaaS, fintech, government, and healthcare. Currently researching AI pipelines and distributed systems while completing a Master's in Applied Computer Science.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#contact">Get in touch</a>
-          <a class="btn btn-ghost" href="#experience">See the work</a>
-        </div>
-      </div>
-      <div class="schematic-frame crop">
-        <svg viewBox="0 0 420 360" role="img" aria-label="Schematic diagram connecting core engineering disciplines around a central AI systems node">
-          <circle class="node-circle core" cx="210" cy="180" r="42"/>
-          <text class="node-label" x="210" y="177" text-anchor="middle" font-weight="600" fill="#E8A33D">AI &amp;</text>
-          <text class="node-label" x="210" y="191" text-anchor="middle" font-weight="600" fill="#E8A33D">SYSTEMS</text>
-
-          <circle class="node-circle" cx="80" cy="70" r="34"/>
-          <text class="node-label" x="80" y="66" text-anchor="middle">BACKEND</text>
-          <text class="node-label" x="80" y="79" text-anchor="middle">APIS</text>
-
-          <circle class="node-circle" cx="340" cy="70" r="34"/>
-          <text class="node-label" x="340" y="66" text-anchor="middle">MICRO-</text>
-          <text class="node-label" x="340" y="79" text-anchor="middle">SERVICES</text>
-
-          <circle class="node-circle" cx="60" cy="230" r="34"/>
-          <text class="node-label" x="60" y="226" text-anchor="middle">DATA-</text>
-          <text class="node-label" x="60" y="239" text-anchor="middle">BASES</text>
-
-          <circle class="node-circle" cx="360" cy="230" r="34"/>
-          <text class="node-label" x="360" y="226" text-anchor="middle">CLOUD</text>
-          <text class="node-label" x="360" y="239" text-anchor="middle">&amp; DEVOPS</text>
-
-          <circle class="node-circle" cx="210" cy="320" r="30"/>
-          <text class="node-label" x="210" y="317" text-anchor="middle">RESEARCH</text>
-          <text class="node-label" x="210" y="330" text-anchor="middle">&amp; RAG</text>
-
-          <path class="trace live" d="M105,88 L172,158"/>
-          <path class="trace live" d="M315,88 L248,158"/>
-          <path class="trace live" d="M90,205 L178,193"/>
-          <path class="trace live" d="M330,205 L242,193"/>
-          <path class="trace live" d="M210,222 L210,290"/>
-          <path class="trace" d="M114,70 L306,70"/>
-          <path class="trace" d="M94,230 L326,230"/>
-        </svg>
-        <p class="schema-caption">core competencies — traced live</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="section-tag">01</span>
-        <h2 class="section-title">Summary</h2>
-      </div>
-      <div class="about-body">
-        <div>
-          <p>I've spent six years designing REST APIs, modernizing legacy platforms, and delivering cloud-based systems for companies and governments across four countries — from a restaurant SaaS in Finland to blood-bank infrastructure for the Nepal government.</p>
-          <p>Right now I'm extending that foundation into AI: building retrieval-augmented pipelines, mentoring teams on LLM-powered applications, and researching distributed AI systems as a graduate research assistant. I care about systems that hold up under real load — and about making them a little smarter.</p>
-        </div>
-        <ul class="stat-list">
-          <li><span class="stat-num">6+ yrs</span><span class="stat-label">Backend &amp; full-stack engineering</span></li>
-          <li><span class="stat-num">5</span><span class="stat-label">Countries worked across — US, Finland, Nepal, and remote gov. partners</span></li>
-          <li><span class="stat-num">2</span><span class="stat-label">Papers accepted at CAINE &amp; ACMSE 2026</span></li>
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .trace.live {
+          animation: none;
+          stroke-dashoffset: 0;
+          stroke-dasharray: none;
+        }
+        .proj-card {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="wrap">
+        <a href="#top" class="logo"><span class="dot"></span>NIPESH PANT</a>
+        <ul class="navlinks">
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#ai-projects">AI Projects</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
-      </div>
-    </div>
-  </section>
+        <button class="menu-btn" aria-label="menu">MENU</button>
+      </nav>
+    </header>
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="section-tag">02</span>
-        <h2 class="section-title">Experience</h2>
-      </div>
-      <div class="timeline">
-
-        <div class="tl-item current">
-          <div class="tl-dot"></div>
-          <div class="tl-head">
-            <span class="tl-role">Graduate Research Assistant</span>
-            <span class="tl-dates">May 2025 — May 2026</span>
+    <main id="top">
+      <!-- HERO -->
+      <section class="hero" style="border-top: none">
+        <div class="wrap hero-grid">
+          <div>
+            <p class="eyebrow">Bay Area, CA · Backend &amp; Systems Engineer</p>
+            <h1 class="headline">
+              I design the architecture underneath —
+              <em>and I'm extending it into AI.</em>
+            </h1>
+            <p class="sub">
+              6+ years building backend and full-stack systems across SaaS,
+              fintech, government, and healthcare. Currently researching AI
+              pipelines and distributed systems while completing a Master's in
+              Applied Computer Science.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#contact">Get in touch</a>
+              <a class="btn btn-ghost" href="#experience">See the work</a>
+            </div>
           </div>
-          <div class="tl-org">Dept. of Computer Science, Southeast Missouri State University</div>
-          <ul class="tl-bullets">
-            <li>Built a full-stack university community platform (<strong>Next.js, React, PostgreSQL</strong>) used by 20+ campus organizations.</li>
-            <li>Designed an <strong>AI pipeline</strong> for malicious node detection across distributed P2P networks, running 100+ experiments for peer-reviewed research.</li>
-            <li>Spearheaded the HCBC AI Hackathon end-to-end and mentored teams building a RAG cybersecurity assistant and an AI agent marketplace.</li>
+          <div class="schematic-frame crop">
+            <svg
+              viewBox="0 0 420 360"
+              role="img"
+              aria-label="Schematic diagram connecting core engineering disciplines around a central AI systems node"
+            >
+              <circle class="node-circle core" cx="210" cy="180" r="42" />
+              <text
+                class="node-label"
+                x="210"
+                y="177"
+                text-anchor="middle"
+                font-weight="600"
+                fill="#E8A33D"
+              >
+                AI &amp;
+              </text>
+              <text
+                class="node-label"
+                x="210"
+                y="191"
+                text-anchor="middle"
+                font-weight="600"
+                fill="#E8A33D"
+              >
+                SYSTEMS
+              </text>
+
+              <circle class="node-circle" cx="80" cy="70" r="34" />
+              <text class="node-label" x="80" y="66" text-anchor="middle">
+                BACKEND
+              </text>
+              <text class="node-label" x="80" y="79" text-anchor="middle">
+                APIS
+              </text>
+
+              <circle class="node-circle" cx="340" cy="70" r="34" />
+              <text class="node-label" x="340" y="66" text-anchor="middle">
+                MICRO-
+              </text>
+              <text class="node-label" x="340" y="79" text-anchor="middle">
+                SERVICES
+              </text>
+
+              <circle class="node-circle" cx="60" cy="230" r="34" />
+              <text class="node-label" x="60" y="226" text-anchor="middle">
+                DATA-
+              </text>
+              <text class="node-label" x="60" y="239" text-anchor="middle">
+                BASES
+              </text>
+
+              <circle class="node-circle" cx="360" cy="230" r="34" />
+              <text class="node-label" x="360" y="226" text-anchor="middle">
+                CLOUD
+              </text>
+              <text class="node-label" x="360" y="239" text-anchor="middle">
+                &amp; DEVOPS
+              </text>
+
+              <circle class="node-circle" cx="210" cy="320" r="30" />
+              <text class="node-label" x="210" y="317" text-anchor="middle">
+                RESEARCH
+              </text>
+              <text class="node-label" x="210" y="330" text-anchor="middle">
+                &amp; RAG
+              </text>
+
+              <path class="trace live" d="M105,88 L172,158" />
+              <path class="trace live" d="M315,88 L248,158" />
+              <path class="trace live" d="M90,205 L178,193" />
+              <path class="trace live" d="M330,205 L242,193" />
+              <path class="trace live" d="M210,222 L210,290" />
+              <path class="trace" d="M114,70 L306,70" />
+              <path class="trace" d="M94,230 L326,230" />
+            </svg>
+            <p class="schema-caption">core competencies — traced live</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="section-tag">01</span>
+            <h2 class="section-title">Summary</h2>
+          </div>
+          <div class="about-body">
+            <div>
+              <p>
+                I've spent six years designing REST APIs, modernizing legacy
+                platforms, and delivering cloud-based systems for companies and
+                governments across four countries — from a restaurant SaaS in
+                Finland to blood-bank infrastructure for the Nepal government.
+              </p>
+              <p>
+                Right now I'm extending that foundation into AI: building
+                retrieval-augmented pipelines, mentoring teams on LLM-powered
+                applications, and researching distributed AI systems as a
+                graduate research assistant. I care about systems that hold up
+                under real load — and about making them a little smarter.
+              </p>
+            </div>
+            <ul class="stat-list">
+              <li>
+                <span class="stat-num">6+ yrs</span
+                ><span class="stat-label"
+                  >Backend &amp; full-stack engineering</span
+                >
+              </li>
+              <li>
+                <span class="stat-num">5</span
+                ><span class="stat-label"
+                  >Countries worked across — US, Finland, Nepal, and remote gov.
+                  partners</span
+                >
+              </li>
+              <li>
+                <span class="stat-num">2</span
+                ><span class="stat-label"
+                  >Papers accepted at CAINE &amp; ACMSE 2026</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="section-tag">02</span>
+            <h2 class="section-title">Experience</h2>
+          </div>
+          <div class="timeline">
+            <div class="tl-item current">
+              <div class="tl-dot"></div>
+              <div class="tl-head">
+                <span class="tl-role">Graduate Research Assistant</span>
+                <span class="tl-dates">May 2025 — May 2026</span>
+              </div>
+              <div class="tl-org">
+                Dept. of Computer Science, Southeast Missouri State University
+              </div>
+              <ul class="tl-bullets">
+                <li>
+                  Built a full-stack university community platform (<strong
+                    >Next.js, React, PostgreSQL</strong
+                  >) used by 20+ campus organizations.
+                </li>
+                <li>
+                  Designed an <strong>AI pipeline</strong> for malicious node
+                  detection across distributed P2P networks, running 100+
+                  experiments for peer-reviewed research.
+                </li>
+                <li>
+                  Spearheaded the HCBC AI Hackathon end-to-end and mentored
+                  teams building a RAG cybersecurity assistant and an AI agent
+                  marketplace.
+                </li>
+              </ul>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-head">
+                <span class="tl-role"
+                  >Team Lead · Backend Software Engineer</span
+                >
+                <span class="tl-dates">Nov 2023 — Jun 2024</span>
+              </div>
+              <div class="tl-org">Rumrail LLC, Lewes, DE</div>
+              <ul class="tl-bullets">
+                <li>
+                  Promoted to Team Lead within one month; led sprint planning
+                  and mentored 5+ engineers.
+                </li>
+                <li>
+                  Led migration of a
+                  <strong>10,000+ user, 200+ organization</strong> multi-tenant
+                  SaaS platform from a Laravel monolith to
+                  <strong>Java Spring Boot microservices</strong> with zero
+                  production downtime.
+                </li>
+                <li>
+                  Built the microservices foundation with
+                  <strong>Spring Boot, Eureka, Kafka, Resilience4j</strong>,
+                  cutting API response times by 30%.
+                </li>
+              </ul>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-head">
+                <span class="tl-role">Backend Developer</span>
+                <span class="tl-dates">Apr 2023 — Nov 2023</span>
+              </div>
+              <div class="tl-org">Resimator Oy, Turku, Finland</div>
+              <ul class="tl-bullets">
+                <li>
+                  Built REST APIs for Seldio, a restaurant SaaS platform,
+                  powering POS, kiosks, CRM, and online ordering.
+                </li>
+                <li>
+                  Designed an event-driven architecture (<strong
+                    >Laravel Broadcasting, Redis Queues</strong
+                  >) syncing kiosks, kitchen printers, and POS terminals in real
+                  time.
+                </li>
+                <li>
+                  Integrated Stripe subscriptions and terminal card payments;
+                  cut response times ~20% via query and caching optimization.
+                </li>
+              </ul>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-head">
+                <span class="tl-role">Senior Backend Developer</span>
+                <span class="tl-dates">Apr 2021 — Mar 2023</span>
+              </div>
+              <div class="tl-org">
+                Young Minds Creation Pvt Ltd, Kathmandu, Nepal
+              </div>
+              <ul class="tl-bullets">
+                <li>
+                  Built enterprise applications for the Ministry of Health,
+                  FNCCI, UNDP, UNICEF, and Swisscontact.
+                </li>
+                <li>
+                  Designed a reusable modular Laravel architecture (Git
+                  submodules, repository patterns) standardizing delivery across
+                  projects.
+                </li>
+                <li>
+                  Awarded <strong>Developer of the Year</strong> for technical
+                  contributions and architecture improvements.
+                </li>
+              </ul>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-head">
+                <span class="tl-role">Jr. Software Developer</span>
+                <span class="tl-dates">Aug 2019 — Aug 2021</span>
+              </div>
+              <div class="tl-org">Radius Infosys Pvt Ltd, Kathmandu, Nepal</div>
+              <ul class="tl-bullets">
+                <li>
+                  Built a hospital management system covering registration,
+                  billing, pharmacy, and records (<strong
+                    >Laravel, React, MySQL</strong
+                  >).
+                </li>
+                <li>
+                  Deployed a production hospital system to an on-premises server
+                  for a rural healthcare facility.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AI PROJECTS -->
+      <section id="ai-projects">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="section-tag">03</span>
+            <h2 class="section-title">AI Projects</h2>
+          </div>
+          <div class="ai-proj-list">
+            <div class="ai-proj-card crop">
+              <div class="ai-proj-head">
+                <span class="ai-proj-title">Tone Coach</span>
+                <p class="ai-proj-tagline">
+                  Write something, and it tells you whether it reads formal or
+                  informal — then rewrites it in the tone you actually meant.
+                </p>
+                <div class="ai-proj-links">
+                  <a
+                    href="https://github.com/Nipace/ai-engineering-journey/tree/main/01-English-Coach"
+                    target="_blank"
+                    rel="noopener"
+                    >Live demo →</a
+                  >
+                  <a
+                    href="https://github.com/Nipace/ai-engineering-journey/tree/main/01-English-Coach"
+                    target="_blank"
+                    rel="noopener"
+                    >GitHub →</a
+                  >
+                </div>
+              </div>
+              <div class="ai-proj-body">
+                <p class="ai-proj-how">How it works</p>
+                <p class="ai-proj-detail">
+                  A FastAPI backend sends the input text to an LLM prompt tuned
+                  to classify tone (formal / informal / mixed) and flag whether
+                  it fits the intended context, then generates a corrected
+                  rewrite that preserves the original meaning rather than just
+                  softening or stiffening the language.
+                </p>
+                <div class="ai-proj-stack">
+                  <span class="chip">FastAPI</span
+                  ><span class="chip">React</span><span class="chip">Groq</span
+                  ><span class="chip">Prompt Engineering</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="ai-proj-card crop">
+              <div class="ai-proj-head">
+                <span class="ai-proj-title">Career Copilot</span>
+                <p class="ai-proj-tagline">
+                  Upload a resume and a job description; get back a structured
+                  match report with strengths, gaps, and what to fix.
+                </p>
+                <div class="ai-proj-links">
+                  <a
+                    href="https://github.com/Nipace/ai-engineering-journey/tree/main/02-Career-Copilot"
+                    target="_blank"
+                    rel="noopener"
+                    >Live demo →</a
+                  >
+                  <a
+                    href="https://github.com/Nipace/ai-engineering-journey/tree/main/02-Career-Copilot"
+                    target="_blank"
+                    rel="noopener"
+                    >GitHub →</a
+                  >
+                </div>
+              </div>
+              <div class="ai-proj-body">
+                <p class="ai-proj-how">How it works</p>
+                <p class="ai-proj-detail">
+                  Extracts raw text from an uploaded CV, pairs it with the
+                  pasted job description, and sends both to the LLM in a single
+                  structured prompt that returns a strengths/weaknesses
+                  breakdown — grounding the analysis in both documents rather
+                  than generic resume advice.
+                </p>
+                <div class="ai-proj-stack">
+                  <span class="chip">FastAPI</span
+                  ><span class="chip">React</span><span class="chip">Groq</span
+                  ><span class="chip">Text Extraction</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="ai-proj-card crop">
+              <div class="ai-proj-head">
+                <span class="ai-proj-title">AI Email Rewriter</span>
+                <p class="ai-proj-tagline">
+                  Paste an email, pick a tone, and watch the rewrite stream in
+                  live — no waiting on a spinner.
+                </p>
+                <div class="ai-proj-links">
+                  <a
+                    href="https://ai-email-rewritter.vercel.app/"
+                    target="_blank"
+                    rel="noopener"
+                    >Live demo →</a
+                  >
+                  <a
+                    href="https://github.com/Nipace/AI-Email-Rewritter"
+                    target="_blank"
+                    rel="noopener"
+                    >GitHub →</a
+                  >
+                </div>
+              </div>
+              <div class="ai-proj-body">
+                <p class="ai-proj-how">How it works</p>
+                <p class="ai-proj-detail">
+                  The rewrite is streamed token-by-token from the LLM to the
+                  React frontend as it's generated, rather than returned as one
+                  blocking response — the main engineering focus was handling
+                  that streaming connection cleanly on both the FastAPI and
+                  client side.
+                </p>
+                <div class="ai-proj-stack">
+                  <span class="chip">FastAPI</span
+                  ><span class="chip">React</span><span class="chip">Groq</span
+                  ><span class="chip">Streaming</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="section-tag">04</span>
+            <h2 class="section-title">Skills</h2>
+          </div>
+          <div class="skill-groups">
+            <div class="skill-group">
+              <p class="skill-group-title">Languages</p>
+              <div class="chip-row">
+                <span class="chip">Java</span
+                ><span class="chip">JavaScript</span
+                ><span class="chip">TypeScript</span
+                ><span class="chip">Python</span><span class="chip">PHP</span
+                ><span class="chip">Go</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <p class="skill-group-title">Backend</p>
+              <div class="chip-row">
+                <span class="chip">Spring Boot</span
+                ><span class="chip">Spring Cloud</span
+                ><span class="chip">Node.js</span
+                ><span class="chip">Express.js</span
+                ><span class="chip">Laravel</span
+                ><span class="chip">REST APIs</span
+                ><span class="chip">Microservices</span
+                ><span class="chip">JWT / OAuth</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <p class="skill-group-title">Java ecosystem</p>
+              <div class="chip-row">
+                <span class="chip">Eureka</span
+                ><span class="chip">Spring Data JPA</span
+                ><span class="chip">Maven</span><span class="chip">Kafka</span
+                ><span class="chip">Resilience4j</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <p class="skill-group-title">Frontend</p>
+              <div class="chip-row">
+                <span class="chip">React.js</span
+                ><span class="chip">Vue.js</span
+                ><span class="chip">Tailwind CSS</span
+                ><span class="chip">Bootstrap</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <p class="skill-group-title">Databases</p>
+              <div class="chip-row">
+                <span class="chip">MySQL</span
+                ><span class="chip">PostgreSQL</span
+                ><span class="chip">MongoDB</span
+                ><span class="chip">Redis</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <p class="skill-group-title">Cloud, DevOps &amp; AI</p>
+              <div class="chip-row">
+                <span class="chip">AWS</span><span class="chip">Docker</span
+                ><span class="chip">Kubernetes</span
+                ><span class="chip">Git</span
+                ><span class="chip">OpenAI API</span
+                ><span class="chip">Prompt Engineering</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="section-tag">05</span>
+            <h2 class="section-title">Professional Projects</h2>
+          </div>
+          <div class="proj-grid">
+            <div class="proj-card">
+              <div class="proj-title">Seldio</div>
+              <p class="proj-desc">
+                Restaurant SaaS platform — backend services for kiosk and POS
+                systems enabling real-time order processing and device
+                communication.
+              </p>
+              <a
+                class="proj-link"
+                href="https://en.seldio.fi/"
+                target="_blank"
+                rel="noopener"
+                >View live →</a
+              >
+            </div>
+            <div class="proj-card">
+              <div class="proj-title">Jobinator</div>
+              <p class="proj-desc">
+                Salary prediction platform using a KNN model served through
+                Flask APIs.
+              </p>
+              <a
+                class="proj-link"
+                href="https://github.com/Nipace/jagir.com"
+                target="_blank"
+                rel="noopener"
+                >View on GitHub →</a
+              >
+            </div>
+            <div class="proj-card">
+              <div class="proj-title">Namaste Mayor</div>
+              <p class="proj-desc">
+                Grievance reporting app where citizens submit issues and local
+                authorities take action.
+              </p>
+              <a
+                class="proj-link"
+                href="https://gunaso.dhangadhimun.gov.np/"
+                target="_blank"
+                rel="noopener"
+                >View live →</a
+              >
+            </div>
+            <div class="proj-card">
+              <div class="proj-title">Blood Donation System</div>
+              <p class="proj-desc">
+                National blood bank platform for Nepal's government tracking
+                donations and blood availability nationwide.
+              </p>
+              <a
+                class="proj-link"
+                href="https://donateblood.nphl.gov.np/"
+                target="_blank"
+                rel="noopener"
+                >View live →</a
+              >
+            </div>
+            <div class="proj-card">
+              <div class="proj-title">FoBi</div>
+              <p class="proj-desc">
+                Restaurant management and billing system — tablet ordering,
+                kitchen management, and real-time KOT printing.
+              </p>
+              <a
+                class="proj-link"
+                href="https://github.com/Nipace/fobi"
+                target="_blank"
+                rel="noopener"
+                >View on GitHub →</a
+              >
+            </div>
+            <div class="proj-card">
+              <div class="proj-title">Medico</div>
+              <p class="proj-desc">
+                Hospital and pharmacy management app handling registration,
+                ticketing, stock, and billing.
+              </p>
+              <a
+                class="proj-link"
+                href="https://github.com/Nipace/hospitaldemo"
+                target="_blank"
+                rel="noopener"
+                >View on GitHub →</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PUBLICATIONS -->
+      <section id="publications">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="section-tag">06</span>
+            <h2 class="section-title">Publications</h2>
+          </div>
+          <ul class="pub-list">
+            <li class="pub-item">
+              <p class="pub-cite">
+                <strong>Pant, N., Ghosh, S., Upadhyay, H., Mitra, R.</strong> —
+                Governing Blockchain-based Decentralized Systems.
+              </p>
+              <span class="pub-venue"
+                >Presented at CAINE 2026 · Proceedings forthcoming, Springer
+                Nature</span
+              >
+            </li>
+            <li class="pub-item">
+              <p class="pub-cite">
+                <strong>Upadhyay, H., Jeffcott, E., Pant, N., et al.</strong> —
+                Blockchain Network Deployment for Federated IoT Access Control.
+              </p>
+              <span class="pub-venue"
+                >Accepted at ACM Southeast Conference (ACMSE) 2026 · ACM Digital
+                Library</span
+              >
+            </li>
           </ul>
         </div>
+      </section>
+    </main>
 
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-head">
-            <span class="tl-role">Team Lead · Backend Software Engineer</span>
-            <span class="tl-dates">Nov 2023 — Jun 2024</span>
-          </div>
-          <div class="tl-org">Rumrail LLC, Lewes, DE</div>
-          <ul class="tl-bullets">
-            <li>Promoted to Team Lead within one month; led sprint planning and mentored 5+ engineers.</li>
-            <li>Led migration of a <strong>10,000+ user, 200+ organization</strong> multi-tenant SaaS platform from a Laravel monolith to <strong>Java Spring Boot microservices</strong> with zero production downtime.</li>
-            <li>Built the microservices foundation with <strong>Spring Boot, Eureka, Kafka, Resilience4j</strong>, cutting API response times by 30%.</li>
-          </ul>
+    <footer id="contact">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-tag">07</span>
+          <h2 class="section-title">Contact</h2>
         </div>
-
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-head">
-            <span class="tl-role">Backend Developer</span>
-            <span class="tl-dates">Apr 2023 — Nov 2023</span>
+        <div class="contact-grid">
+          <div class="contact-links">
+            <a href="mailto:nipeshpant@gmail.com">nipeshpant@gmail.com</a>
+            <a href="tel:+15737305755">(573) 730-5755</a>
+            <a
+              href="https://www.linkedin.com/in/nipace/"
+              target="_blank"
+              rel="noopener"
+              >linkedin.com/in/nipace</a
+            >
           </div>
-          <div class="tl-org">Resimator Oy, Turku, Finland</div>
-          <ul class="tl-bullets">
-            <li>Built REST APIs for Seldio, a restaurant SaaS platform, powering POS, kiosks, CRM, and online ordering.</li>
-            <li>Designed an event-driven architecture (<strong>Laravel Broadcasting, Redis Queues</strong>) syncing kiosks, kitchen printers, and POS terminals in real time.</li>
-            <li>Integrated Stripe subscriptions and terminal card payments; cut response times ~20% via query and caching optimization.</li>
-          </ul>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-head">
-            <span class="tl-role">Senior Backend Developer</span>
-            <span class="tl-dates">Apr 2021 — Mar 2023</span>
-          </div>
-          <div class="tl-org">Young Minds Creation Pvt Ltd, Kathmandu, Nepal</div>
-          <ul class="tl-bullets">
-            <li>Built enterprise applications for the Ministry of Health, FNCCI, UNDP, UNICEF, and Swisscontact.</li>
-            <li>Designed a reusable modular Laravel architecture (Git submodules, repository patterns) standardizing delivery across projects.</li>
-            <li>Awarded <strong>Developer of the Year</strong> for technical contributions and architecture improvements.</li>
-          </ul>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-head">
-            <span class="tl-role">Jr. Software Developer</span>
-            <span class="tl-dates">Aug 2019 — Aug 2021</span>
-          </div>
-          <div class="tl-org">Radius Infosys Pvt Ltd, Kathmandu, Nepal</div>
-          <ul class="tl-bullets">
-            <li>Built a hospital management system covering registration, billing, pharmacy, and records (<strong>Laravel, React, MySQL</strong>).</li>
-            <li>Deployed a production hospital system to an on-premises server for a rural healthcare facility.</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="section-tag">03</span>
-        <h2 class="section-title">Skills</h2>
-      </div>
-      <div class="skill-groups">
-        <div class="skill-group">
-          <p class="skill-group-title">Languages</p>
-          <div class="chip-row">
-            <span class="chip">Java</span><span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">Python</span><span class="chip">PHP</span><span class="chip">Go</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <p class="skill-group-title">Backend</p>
-          <div class="chip-row">
-            <span class="chip">Spring Boot</span><span class="chip">Spring Cloud</span><span class="chip">Node.js</span><span class="chip">Express.js</span><span class="chip">Laravel</span><span class="chip">REST APIs</span><span class="chip">Microservices</span><span class="chip">JWT / OAuth</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <p class="skill-group-title">Java ecosystem</p>
-          <div class="chip-row">
-            <span class="chip">Eureka</span><span class="chip">Spring Data JPA</span><span class="chip">Maven</span><span class="chip">Kafka</span><span class="chip">Resilience4j</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <p class="skill-group-title">Frontend</p>
-          <div class="chip-row">
-            <span class="chip">React.js</span><span class="chip">Vue.js</span><span class="chip">Tailwind CSS</span><span class="chip">Bootstrap</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <p class="skill-group-title">Databases</p>
-          <div class="chip-row">
-            <span class="chip">MySQL</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span><span class="chip">Redis</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <p class="skill-group-title">Cloud, DevOps &amp; AI</p>
-          <div class="chip-row">
-            <span class="chip">AWS</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">Git</span><span class="chip">OpenAI API</span><span class="chip">Prompt Engineering</span>
-          </div>
+          <p class="footer-note">
+            Bay Area, CA — open to backend, systems, and AI engineering roles.
+          </p>
         </div>
       </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="section-tag">04</span>
-        <h2 class="section-title">Projects</h2>
-      </div>
-      <div class="proj-grid">
-        <div class="proj-card">
-          <div class="proj-title">Seldio</div>
-          <p class="proj-desc">Restaurant SaaS platform — backend services for kiosk and POS systems enabling real-time order processing and device communication.</p>
-          <a class="proj-link" href="https://en.seldio.fi/" target="_blank" rel="noopener">View live →</a>
-        </div>
-        <div class="proj-card">
-          <div class="proj-title">Jobinator</div>
-          <p class="proj-desc">Salary prediction platform using a KNN model served through Flask APIs.</p>
-          <a class="proj-link" href="https://github.com/Nipace/jagir.com" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-        <div class="proj-card">
-          <div class="proj-title">Namaste Mayor</div>
-          <p class="proj-desc">Grievance reporting app where citizens submit issues and local authorities take action.</p>
-          <a class="proj-link" href="https://gunaso.dhangadhimun.gov.np/" target="_blank" rel="noopener">View live →</a>
-        </div>
-        <div class="proj-card">
-          <div class="proj-title">Blood Donation System</div>
-          <p class="proj-desc">National blood bank platform for Nepal's government tracking donations and blood availability nationwide.</p>
-          <a class="proj-link" href="https://donateblood.nphl.gov.np/" target="_blank" rel="noopener">View live →</a>
-        </div>
-        <div class="proj-card">
-          <div class="proj-title">FoBi</div>
-          <p class="proj-desc">Restaurant management and billing system — tablet ordering, kitchen management, and real-time KOT printing.</p>
-          <a class="proj-link" href="https://github.com/Nipace/fobi" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-        <div class="proj-card">
-          <div class="proj-title">Medico</div>
-          <p class="proj-desc">Hospital and pharmacy management app handling registration, ticketing, stock, and billing.</p>
-          <a class="proj-link" href="https://github.com/Nipace/hospitaldemo" target="_blank" rel="noopener">View on GitHub →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PUBLICATIONS -->
-  <section id="publications">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="section-tag">05</span>
-        <h2 class="section-title">Publications</h2>
-      </div>
-      <ul class="pub-list">
-        <li class="pub-item">
-          <p class="pub-cite"><strong>Pant, N., Ghosh, S., Upadhyay, H., Mitra, R.</strong> — Governing Blockchain-based Decentralized Systems.</p>
-          <span class="pub-venue">Presented at CAINE 2026 · Proceedings forthcoming, Springer Nature</span>
-        </li>
-        <li class="pub-item">
-          <p class="pub-cite"><strong>Upadhyay, H., Jeffcott, E., Pant, N., et al.</strong> — Blockchain Network Deployment for Federated IoT Access Control.</p>
-          <span class="pub-venue">Accepted at ACM Southeast Conference (ACMSE) 2026 · ACM Digital Library</span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-</main>
-
-<footer id="contact">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="section-tag">06</span>
-      <h2 class="section-title">Contact</h2>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-links">
-        <a href="mailto:nipeshpant@gmail.com">nipeshpant@gmail.com</a>
-        <a href="tel:+15737305755">(573) 730-5755</a>
-        <a href="https://www.linkedin.com/in/nipace/" target="_blank" rel="noopener">linkedin.com/in/nipace</a>
-      </div>
-      <p class="footer-note">Bay Area, CA — open to backend, systems, and AI engineering roles.</p>
-    </div>
-  </div>
-</footer>
-
-<script>
-  // Mobile menu toggle
-  document.querySelector('.menu-btn')?.addEventListener('click', () => {
-    const nav = document.querySelector('.navlinks');
-    const open = nav.style.display === 'flex';
-    nav.style.display = open ? 'none' : 'flex';
-    nav.style.flexDirection = 'column';
-    nav.style.position = 'absolute';
-    nav.style.top = '68px';
-    nav.style.right = '0';
-    nav.style.background = '#0B1E33';
-    nav.style.border = '1px solid #2A4A66';
-    nav.style.padding = '10px';
-  });
-</script>
-
-</body>
+    <script>
+      // Mobile menu toggle
+      document.querySelector(".menu-btn")?.addEventListener("click", () => {
+        const nav = document.querySelector(".navlinks");
+        const open = nav.style.display === "flex";
+        nav.style.display = open ? "none" : "flex";
+        nav.style.flexDirection = "column";
+        nav.style.position = "absolute";
+        nav.style.top = "68px";
+        nav.style.right = "0";
+        nav.style.background = "#0B1E33";
+        nav.style.border = "1px solid #2A4A66";
+        nav.style.padding = "10px";
+      });
+    </script>
+  </body>
 </html>
